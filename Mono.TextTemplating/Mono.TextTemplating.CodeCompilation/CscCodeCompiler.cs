@@ -152,6 +152,7 @@ namespace Mono.TextTemplating.CodeCompilation
 				}
 			}
 
+Measure.Step();
 			var psi = new System.Diagnostics.ProcessStartInfo (runtime.CscPath) {
 				Arguments = $"-nologo -noconfig \"@{rspPath}\" {arguments.AdditionalArguments}",
 				CreateNoWindow = true,
@@ -181,6 +182,8 @@ namespace Mono.TextTemplating.CodeCompilation
 			var process = ProcessUtils.StartProcess (psi, outWriter, errWriter, token);
 
 			var result = await process;
+Measure.Step("Process " + psi.FileName + " " + psi.Arguments);
+
 
 			var outputList = new List<string> ();
 			var errors = new List<CodeCompilerError> ();
